@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: General Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: General
+  m_TableCollectionNameGuidString: e9062a8782b20884b90725502d44a545
+  m_Entries:
+  - m_Id: 7670067200
+    m_Key: coins.left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 336423805513728
+    m_Key: endgame.score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373466912780288
+    m_Key: endgame.time
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 887210331569389570
+  references:
+    version: 2
+    RefIds:
+    - rid: 887210331569389570
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1685895609028
