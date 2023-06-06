@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: 'Collected time: {0}'
     m_Metadata:
       m_Items: []
+  - m_Id: 667574566907904
+    m_Localized: 'Best time: {0}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

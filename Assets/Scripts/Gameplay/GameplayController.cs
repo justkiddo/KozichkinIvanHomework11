@@ -42,7 +42,13 @@ namespace root
             _endGame = true;
             _gameplayInfo.CoinTime.Value = Time.time.ToString();
             _gameplayInfo.EndGame.Value = true;
+            if (_gameplayInfo.BestTime.Value !=0 )
+            {
+                //!!!!!!!!!!!!!
+            }
             Time.timeScale = 0;
         }
+        
+        
     }
 }

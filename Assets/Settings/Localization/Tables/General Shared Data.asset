@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: endgame.time
     m_Metadata:
       m_Items: []
+  - m_Id: 667574566907904
+    m_Key: endgame.best.time
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

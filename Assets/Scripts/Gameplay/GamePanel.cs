@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UniRx;
@@ -10,6 +9,7 @@ namespace root
     public class GamePanel : MonoBehaviour, IInitializable
     {
         [SerializeField] private TextMeshProUGUI coinsInfo;
+        [SerializeField] private GameObject restartButton;
         private IUnityLocalization _localization;
         private GameplayInfo _gameplayInfo;
         private CompositeDisposable _disposable;
@@ -28,6 +28,7 @@ namespace root
         {
             if (_gameplayInfo.EndGame.Value == true)
             {
+                restartButton.SetActive(true);
                 Destroy(coinsInfo);
             }
         }
@@ -49,16 +50,16 @@ namespace root
         private void AddListeners()
         {
             _gameplayInfo.CoinCount.Subscribe(_ => UpdateInfo()).AddTo(_disposable);
+            
         }
+
+
 
         private void UpdateInfo()
         {
             coinsInfo.text = _localization.Translate("coins.left", _gameplayInfo.CoinCount.Value);
         }
 
-        private void OnDestroy()
-        {
-            _disposable.Dispose();
-        }
+
     }
 }
