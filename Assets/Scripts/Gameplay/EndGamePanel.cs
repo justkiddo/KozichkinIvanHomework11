@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -27,8 +28,13 @@ namespace root
 
         public void Initialize()
         {
-            _disposable = new CompositeDisposable();
+            _disposable = new CompositeDisposable();  // не отрабатывает при перезагрузке
             
+        }
+
+        private void Awake()
+        {
+            _disposable = new CompositeDisposable();
         }
 
         private void Update()
@@ -36,7 +42,6 @@ namespace root
             if (_gameplayInfo.EndGame.Value)
             {
                 AddListeners();
-                
             }
         }
 
@@ -56,7 +61,7 @@ namespace root
         private void OnButtonClicked()
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void UpdateCoinTimeInfo()
@@ -68,7 +73,10 @@ namespace root
         {
             bestTimeInfo.text = _localization.Translate("endgame.best.time",_gameplayInfo.BestTime.Value);
         }
-        
- 
+
+        private void OnDestroy()
+        {
+            _disposable.Dispose();
+        }
     }
 }

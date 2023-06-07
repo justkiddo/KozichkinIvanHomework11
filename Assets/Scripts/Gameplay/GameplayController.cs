@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -8,33 +9,37 @@ namespace root
     {
         
         private GameplayInfo _gameplayInfo;
-        private CompositeDisposable _disposable;
+        private EnemyFactory _enemyFactory;
         private static bool _endGame { get; set; } = false;
 
         [Inject]
-        private void Construct( GameplayInfo gameplayInfo)
+        private void Construct( GameplayInfo gameplayInfo, EnemyFactory enemyFactory)
         {
+            _enemyFactory = enemyFactory;
             _gameplayInfo = gameplayInfo;
         }
         
 
         public void Initialize()
         {
-            _disposable = new CompositeDisposable();
             AddListeners();
+            _gameplayInfo.EndGame.Value = false;
+            _gameplayInfo.CoinTime.Value = String.Empty;
+            _enemyFactory.Create();
         }
         
         private void AddListeners()
         {
-            _gameplayInfo.CoinCount.Subscribe(_ => UpdateInfo()).AddTo(_disposable);
+            _gameplayInfo.CoinCount.Subscribe(_ => UpdateInfo());
+            _gameplayInfo.EndGame.Subscribe(_ => UpdateInfo());
         }
 
         private void UpdateInfo()
         {
-            if (_gameplayInfo.CoinCount.Value == 0)
+            if (_gameplayInfo.CoinCount.Value == 0 || _gameplayInfo.EndGame.Value )
             {
                 EndGame();
-            } 
+            }
         }
 
         public void EndGame()

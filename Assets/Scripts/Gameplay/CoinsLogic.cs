@@ -21,8 +21,5 @@ namespace root
             _gameplayInfo.CollectedCoins.Value++;
             Destroy(coin);
         }
-
-
-
     }
 }

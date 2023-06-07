@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace root
@@ -8,7 +9,7 @@ namespace root
         [SerializeField] private float speed = 2;
         [SerializeField] private Transform enemyPosition;
         private IPlayer _player;
-        public bool _followPlayer;
+        public bool followPlayer;
         
         
         [Inject]
@@ -23,7 +24,7 @@ namespace root
 
         private void Update()
         {
-            if (_followPlayer)
+            if (followPlayer)
             { 
                 transform. position = Vector3.MoveTowards(transform.position, _player.GetCurrentPosition(), 
                     Time.deltaTime * speed );
@@ -34,20 +35,5 @@ namespace root
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (col.CompareTag("Player"))
-            {
-                _followPlayer = true;
-            }
-        }
-
-        private void OnTriggerExit2D(Collider2D other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                _followPlayer = false;
-            }
-        }
     }
 }

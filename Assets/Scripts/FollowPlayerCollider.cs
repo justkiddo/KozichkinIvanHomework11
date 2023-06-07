@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using Zenject;
 
 namespace root
 {
-    public class DeathCollider : MonoBehaviour
+    public class FollowPlayerCollider : MonoBehaviour
     {
         [SerializeField] private GameObject followCollider;
         [SerializeField] private Enemy _enemy;
@@ -21,10 +22,17 @@ namespace root
         {
             if (col.CompareTag("Player"))
             {
-                _gameplayInfo.EndGame.Value = true;
+                _enemy.followPlayer = true;
             }
         }
-        
-        
+
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _enemy.followPlayer = false;
+            }
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace root
         [SerializeField] private List<CoinsLogic> coins;
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private List<EnemyInfo> enemyInfos;
+        [SerializeField] private FollowPlayerCollider followCollider;
+
         public override void InstallBindings()
         {
             Container.Bind<GameplayInfo>().AsSingle();
@@ -18,8 +20,9 @@ namespace root
             Container.BindInterfacesTo<EndGamePanel>().FromInstance(endGamePanel);
             Container.Bind<IUnityLocalization>().To<UnityLocalization>().AsSingle().NonLazy();
             Container.BindInterfacesTo<GameplayController>().AsSingle().NonLazy();
-           // Container.BindFactory<Enemy, EnemyFactory>();
+            Container.BindFactory<Enemy, EnemyFactory>();
             Container.Bind<IPlayer>().FromComponentInNewPrefab(playerPrefab).AsSingle().NonLazy();
+            Container.Bind<FollowPlayerCollider>().FromInstance(followCollider);
             foreach (var enemyInfo in enemyInfos)
             {
                 Container.Bind<EnemyInfo>().FromInstance(enemyInfo);
