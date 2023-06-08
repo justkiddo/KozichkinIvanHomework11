@@ -7,8 +7,8 @@ namespace root
 {
     public class DeathCollider : MonoBehaviour
     {
-        [SerializeField] private GameObject followCollider;
-        [SerializeField] private Enemy _enemy;
+         private GameObject followCollider;
+         private Enemy _enemy;
         private GameplayInfo _gameplayInfo;
         
         [Inject]

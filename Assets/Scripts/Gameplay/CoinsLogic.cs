@@ -19,6 +19,7 @@ namespace root
             if (!col.CompareTag("Player")) return;
             _gameplayInfo.CoinCount.Value--;
             _gameplayInfo.CollectedCoins.Value++;
+            Debug.Log(_gameplayInfo.CollectedCoins.Value);
             Destroy(coin);
         }
     }

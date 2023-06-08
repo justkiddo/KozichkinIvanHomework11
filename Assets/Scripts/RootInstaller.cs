@@ -15,7 +15,7 @@ namespace root
 
         public override void InstallBindings()
         {
-            Container.Bind<GameplayInfo>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameplayInfo>().AsSingle();
             Container.BindInterfacesTo<GamePanel>().FromInstance(gamePanel);
             Container.BindInterfacesTo<EndGamePanel>().FromInstance(endGamePanel);
             Container.Bind<IUnityLocalization>().To<UnityLocalization>().AsSingle().NonLazy();

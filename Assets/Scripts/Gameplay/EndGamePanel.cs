@@ -13,10 +13,13 @@ namespace root
         [SerializeField] private TextMeshProUGUI coinsInfo;
         [SerializeField] private TextMeshProUGUI timeInfo;
         [SerializeField] private TextMeshProUGUI bestTimeInfo;
+        [SerializeField] private TextMeshProUGUI bestCoinInfo;
         [SerializeField] private Button restartButton;
+        [SerializeField] private TextMeshProUGUI restartButtonText;
         private IUnityLocalization _localization;
         private GameplayInfo _gameplayInfo;
         private CompositeDisposable _disposable;
+        
         
         
         [Inject]
@@ -29,7 +32,6 @@ namespace root
         public void Initialize()
         {
             _disposable = new CompositeDisposable();  // не отрабатывает при перезагрузке
-            
         }
 
         private void Awake()
@@ -49,8 +51,10 @@ namespace root
         {
             _gameplayInfo.CollectedCoins.Subscribe(_ => UpdateCoinInfo()).AddTo(_disposable);
             _gameplayInfo.CoinTime.Subscribe(_=>UpdateCoinTimeInfo()).AddTo(_disposable);
-            _gameplayInfo.BestTime.Subscribe(_=>BestTimeUpdate()).AddTo(_disposable);
+            _gameplayInfo.BestTime.Subscribe(_=>BestTimeUpdate());
+            _gameplayInfo.BestCoins.Subscribe(_=>BestCoinsUpdate());
              restartButton.onClick.AsObservable().Subscribe(_=> OnButtonClicked()).AddTo(_disposable);
+             restartButtonText.text = _localization.Translate("restart.button");
         }
         
         private void UpdateCoinInfo()
@@ -60,8 +64,12 @@ namespace root
         }
         private void OnButtonClicked()
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // Time.timeScale = 1f;
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //PlayerPrefs.DeleteAll();
+            
+            
+            
         }
 
         private void UpdateCoinTimeInfo()
@@ -71,7 +79,21 @@ namespace root
 
         private void BestTimeUpdate()
         {
+            if (_gameplayInfo.BestTime.Value > _gameplayInfo.CoinTime.Value || _gameplayInfo.BestTime.Value == 0)
+            {
+                _gameplayInfo.BestTime.Value = _gameplayInfo.CoinTime.Value;
+            }
             bestTimeInfo.text = _localization.Translate("endgame.best.time",_gameplayInfo.BestTime.Value);
+        }
+
+        private void BestCoinsUpdate()
+        {
+            
+            if (_gameplayInfo.BestCoins.Value <= _gameplayInfo.CollectedCoins.Value)
+            {
+                _gameplayInfo.BestCoins.Value = _gameplayInfo.CollectedCoins.Value;
+            }
+            bestCoinInfo.text = _localization.Translate("endgame.best.coins",_gameplayInfo.BestCoins.Value);
         }
 
         private void OnDestroy()
