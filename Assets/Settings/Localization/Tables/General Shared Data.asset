@@ -31,6 +31,14 @@ MonoBehaviour:
     m_Key: endgame.best.time
     m_Metadata:
       m_Items: []
+  - m_Id: 1395804676550656
+    m_Key: endgame.best.coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1422081043197952
+    m_Key: restart.button
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

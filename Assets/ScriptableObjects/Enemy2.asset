@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 2
   <Prefab>k__BackingField: {fileID: 5455452452182032225, guid: ff5ab5763f140fd479da3ddbbb874c7f, type: 3}
+  <FollowDistance>k__BackingField: 15
